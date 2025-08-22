@@ -1,0 +1,8 @@
+{
+  "name": "league-manager",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ]
+}
