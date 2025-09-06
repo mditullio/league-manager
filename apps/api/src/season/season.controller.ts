@@ -1,40 +1,42 @@
 import { Controller, Post, Get, Param, Body, Patch, Delete } from '@nestjs/common';
 import { SeasonService } from './season.service';
-import { CreateSeasonDto, UpdateSeasonDto } from './dto/season.dto';
-import { ApiTags, ApiParam } from '@nestjs/swagger';
+import { SeasonDto } from './dto/season.dto';
+import { ApiTags, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('seasons')
 @Controller()
 export class SeasonController {
-  constructor(private readonly seasonService: SeasonService) {}
+    constructor(private readonly seasonService: SeasonService) { }
 
-  @Post('leagues/:leagueId/seasons')
-  @ApiParam({ name: 'leagueId', type: String })
-  create(@Param('leagueId') leagueId: string, @Body() dto: CreateSeasonDto) {
-    return this.seasonService.create(leagueId, dto);
-  }
+    @Post('leagues/:leagueId/seasons')
+    @ApiParam({ name: 'leagueId', type: String })
+    create(@Param('leagueId') leagueId: string, @Body() dto: SeasonDto) {
+        return this.seasonService.create(leagueId, dto);
+    }
 
-  @Get('leagues/:leagueId/seasons')
-  @ApiParam({ name: 'leagueId', type: String })
-  findAllByLeague(@Param('leagueId') leagueId: string) {
-    return this.seasonService.findAllByLeague(leagueId);
-  }
+    @Get('leagues/:leagueId/seasons')
+    @ApiParam({ name: 'leagueId', type: String })
+    @ApiResponse({ status: 200, type: [SeasonDto] })
+    findAllByLeague(@Param('leagueId') leagueId: string) {
+        return this.seasonService.findAllByLeague(leagueId);
+    }
 
-  @Get('seasons/:id')
-  @ApiParam({ name: 'id', type: String })
-  findById(@Param('id') id: string) {
-    return this.seasonService.findById(id);
-  }
+    @Get('seasons/:id')
+    @ApiParam({ name: 'id', type: String })
+    @ApiResponse({ status: 200, type: SeasonDto })
+    findById(@Param('id') id: string) {
+        return this.seasonService.findById(id);
+    }
 
-  @Patch('seasons/:id')
-  @ApiParam({ name: 'id', type: String })
-  update(@Param('id') id: string, @Body() dto: UpdateSeasonDto) {
-    return this.seasonService.update(id, dto);
-  }
+    @Patch('seasons/:id')
+    @ApiParam({ name: 'id', type: String })
+    update(@Param('id') id: string, @Body() dto: SeasonDto) {
+        return this.seasonService.update(id, dto);
+    }
 
-  @Delete('seasons/:id')
-  @ApiParam({ name: 'id', type: String })
-  delete(@Param('id') id: string) {
-    return this.seasonService.delete(id);
-  }
+    @Delete('seasons/:id')
+    @ApiParam({ name: 'id', type: String })
+    delete(@Param('id') id: string) {
+        return this.seasonService.delete(id);
+    }
 }

@@ -1,41 +1,25 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateSeasonDto {
-  @ApiProperty({ example: '2024/2025' })
+export class SeasonDto {
+    
+  @ApiProperty({ example: '64e4b8f2c2a4b2e4d8e4b8f2', description: 'MongoDB ObjectId', required: false })
+  id?: string;
+
+  @ApiProperty({ example: '2024/2025', required: false })
   name: string;
 
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
+  @ApiProperty({ type: String, format: 'date-time', required: false })
   startDate?: string;
 
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
+  @ApiProperty({ type: String, format: 'date-time', required: false })
   endDate?: string;
 
-  @ApiPropertyOptional({ type: String })
+  @ApiProperty({ type: String, required: false })
   league?: string;
 
-  @ApiPropertyOptional({ type: String })
+  @ApiProperty({ type: String, required: false })
   rules?: string;
 
-  @ApiPropertyOptional({ type: [String] })
-  teams?: string[];
-}
-
-export class UpdateSeasonDto {
-  @ApiPropertyOptional({ example: '2024/2025' })
-  name?: string;
-
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
-  startDate?: string;
-
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
-  endDate?: string;
-
-  @ApiPropertyOptional({ type: String })
-  league?: string;
-
-  @ApiPropertyOptional({ type: String })
-  rules?: string;
-
-  @ApiPropertyOptional({ type: [String] })
+  @ApiProperty({ type: [String], required: false })
   teams?: string[];
 }
