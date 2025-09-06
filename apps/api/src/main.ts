@@ -22,7 +22,7 @@ async function bootstrap() {
     res.send(document);
   });
 
-  await app.listen(4200);
+  await app.listen(3000);
 }
 
 bootstrap();
