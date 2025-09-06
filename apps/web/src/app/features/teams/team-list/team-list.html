@@ -1,0 +1,47 @@
+<h1>Teams</h1>
+
+<button mat-raised-button color="primary" (click)="addTeam()">Add Team</button>
+
+<table mat-table [dataSource]="teams" class="mat-elevation-z8 team-table">
+
+    <!-- Colors Column -->
+    <ng-container matColumnDef="colors">
+        <th mat-header-cell *matHeaderCellDef>Colors</th>
+        <td mat-cell *matCellDef="let team"><team-colors-flag [colors]="team.colors"></team-colors-flag></td>
+    </ng-container>
+
+    <!-- Short Name Column -->
+    <ng-container matColumnDef="shortName">
+        <th mat-header-cell *matHeaderCellDef>Short Name</th>
+        <td mat-cell *matCellDef="let team">{{ team.shortName }}</td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let team">{{ team.name }}</td>
+    </ng-container>
+
+    <!-- Nation Column -->
+    <ng-container matColumnDef="nation">
+        <th mat-header-cell *matHeaderCellDef>Nation</th>
+        <td mat-cell *matCellDef="let team">{{ team.nation?.name }}</td>
+    </ng-container>
+
+    <!-- City Column -->
+    <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef>City</th>
+        <td mat-cell *matCellDef="let team">{{ team.city }}</td>
+    </ng-container>
+
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let team">
+            <button mat-button color="accent" (click)="editTeam(team)">Edit</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

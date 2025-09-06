@@ -1,0 +1,19 @@
+.flag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.band {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-right: 0px solid #eee;
+}
+
+.band:last-child {
+  border-right: none;
+}
