@@ -1,0 +1,23 @@
+.team-detail-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 600px;
+}
+
+mat-form-field {
+  flex: 1 1 220px;
+}
+
+.flag-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
