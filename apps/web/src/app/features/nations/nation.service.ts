@@ -30,7 +30,7 @@ export class NationService {
   }
 
   updateNation(id: string, nation: Partial<Nation>): Observable<Nation> {
-    return this.http.patch<Nation>(`${this.baseUrl}/nations/${id}`, nation);
+    return this.http.put<Nation>(`${this.baseUrl}/nations/${id}`, nation);
   }
 
   deleteNation(id: string): Observable<void> {

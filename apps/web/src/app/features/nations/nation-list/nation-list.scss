@@ -6,3 +6,13 @@
 th.mat-header-cell, td.mat-cell {
   padding: 0.5rem 1rem;
 }
+
+th.mat-header-cell.code, td.mat-cell.code {
+  width: 60px;
+  text-align: center;
+}
+
+th.mat-header-cell.flagUrl, td.mat-cell.flagUrl {
+  width: 40px;
+  text-align: center;
+}

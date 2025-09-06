@@ -1,0 +1,33 @@
+.nation-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+.half-width {
+  flex: 1 1 45%;
+}
+
+.flag-preview {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}

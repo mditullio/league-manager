@@ -1,10 +1,15 @@
 <h1>Nations</h1>
 
+<button mat-raised-button color="primary" (click)="addNation()">Add Nation</button>
+
 <table mat-table [dataSource]="nations" class="mat-elevation-z8 nation-table">
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let nation">{{ nation.name }}</td>
+    
+  <!-- Flag URL Column -->
+  <ng-container matColumnDef="flagUrl">
+    <th mat-header-cell *matHeaderCellDef>Flag</th>
+    <td mat-cell *matCellDef="let nation">
+      <img *ngIf="nation.flagUrl" [src]="nation.flagUrl" alt="flag" style="height: 24px; vertical-align: middle;" />
+    </td>
   </ng-container>
 
   <!-- Code Column -->
@@ -13,11 +18,17 @@
     <td mat-cell *matCellDef="let nation">{{ nation.code }}</td>
   </ng-container>
 
-  <!-- Flag URL Column -->
-  <ng-container matColumnDef="flagUrl">
-    <th mat-header-cell *matHeaderCellDef>Flag</th>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let nation">{{ nation.name }}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let nation">
-      <img *ngIf="nation.flagUrl" [src]="nation.flagUrl" alt="flag" style="height: 24px; vertical-align: middle;" />
+      <button mat-button color="accent" (click)="editNation(nation)">Edit</button>
     </td>
   </ng-container>
 
