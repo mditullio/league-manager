@@ -1,43 +1,45 @@
 <h1>{{ isNew ? 'Add Nation' : 'Edit Nation' }}</h1>
 
 <form [formGroup]="form" (ngSubmit)="save()" class="nation-form">
-  <div *ngIf="!isNew" class="form-row">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>ID</mat-label>
-      <input matInput [value]="nationId" readonly />
-    </mat-form-field>
-  </div>
 
-  <div class="form-row">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" required />
-    </mat-form-field>
-  </div>
+    @if (!isNew) {
+        <div style="width: 100%; display: flex;">
+            <mat-form-field appearance="outline">
+                <mat-label>ID</mat-label>
+                <input matInput [value]="nationId" readonly />
+            </mat-form-field>
+        </div>
+    }
 
-  <div class="form-row">
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Code</mat-label>
-      <input matInput formControlName="code" />
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Flag Emoji</mat-label>
-      <input matInput formControlName="flagEmoji" />
-    </mat-form-field>
-  </div>
 
-  <div class="form-row">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Flag URL</mat-label>
-      <input matInput formControlName="flagUrl" />
+    <mat-form-field appearance="outline">
+        <mat-label>Code</mat-label>
+        <input matInput formControlName="code" />
     </mat-form-field>
-    <div *ngIf="form.value.flagUrl" class="flag-preview">
-      <img [src]="form.value.flagUrl" alt="flag" style="height: 32px; margin-left: 1rem;" />
+
+    <mat-form-field appearance="outline">
+        <mat-label>Flag Emoji</mat-label>
+        <input matInput formControlName="flagEmoji" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Flag URL</mat-label>
+        <input matInput formControlName="flagUrl" />
+    </mat-form-field>
+
+    <div class="flag-preview" *ngIf="form.value.flagUrl"
+        style="width: 100%; display: flex; align-items: center; margin-top: 8px;">
+        <label>Flag Preview:</label>
+        <img [src]="form.value.flagUrl" alt="flag" style="height: 32px;" />
     </div>
-  </div>
 
-  <div class="form-actions">
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">Save</button>
-    <button mat-button type="button" (click)="cancel()">Cancel</button>
-  </div>
+    <div class="form-actions"
+        style="width: 100%; display: flex; gap: 16px; margin-top: 24px; justify-content: flex-start;">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">Save</button>
+        <button mat-button type="button" (click)="cancel()">Cancel</button>
+    </div>
 </form>

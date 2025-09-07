@@ -4,6 +4,8 @@ import { NationListComponent } from './features/nations/nation-list/nation-list'
 import { NationDetailComponent } from './features/nations/nation-detail/nation-detail';
 import { TeamListComponent } from './features/teams/team-list/team-list';
 import { TeamDetailComponent } from './features/teams/team-detail/team-detail';
+import { LeagueListComponent } from './features/leagues/league-list/league-list';
+import { LeagueDetailComponent } from './features/leagues/league-detail/league-detail';
 
 export const routes: Routes = [
     {
@@ -29,5 +31,17 @@ export const routes: Routes = [
     {
         path: 'teams/edit/:id',
         component: TeamDetailComponent
+    },
+    {
+        path: 'leagues',
+        component: LeagueListComponent
+    },
+    {
+        path: 'leagues/new',
+        component: LeagueDetailComponent
+    },
+    {
+        path: 'leagues/edit/:id',
+        component: LeagueDetailComponent
     },
 ];
