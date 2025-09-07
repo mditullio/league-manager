@@ -11,20 +11,22 @@ export class SeasonService {
     ) { }
 
     async create(leagueId: string, dto: SeasonDto): Promise<SeasonDto> {
-        const created = await this.seasonModel.create(this.fromDto({ ...dto, league: leagueId }));
-        return this.toDto(created);
+        const created = await this.seasonModel.create(this.fromDto({ ...dto, league: { id: leagueId }}));
+        const populated = await this.seasonModel.findById(created._id).populate('league').exec();
+        if (!populated) throw new NotFoundException('Season not found after creation');
+        return this.toDto(populated);
     }
 
     async findAllByLeague(leagueId: string): Promise<SeasonDto[]> {
         const filter: any = {};
         if (leagueId) filter.league = leagueId;
-        const seasons = await this.seasonModel.find(filter).exec();
+        const seasons = await this.seasonModel.find(filter).populate('league').exec();
         return seasons.map(this.toDto);
     }
 
     async findById(id: string): Promise<SeasonDto> {
         if (!Types.ObjectId.isValid(id)) throw new NotFoundException('Season not found');
-        const season = await this.seasonModel.findById(id).exec();
+        const season = await this.seasonModel.findById(id).populate('league').exec();
         if (!season) throw new NotFoundException('Season not found');
         return this.toDto(season);
     }
@@ -32,17 +34,15 @@ export class SeasonService {
     async update(id: string, dto: SeasonDto): Promise<SeasonDto> {
         if (!Types.ObjectId.isValid(id)) throw new NotFoundException('Season not found');
         const updateQuery: any = { ...dto };
-        if (dto.league) updateQuery.league = new Types.ObjectId(dto.league);
-        if (dto.rules) updateQuery.rules = new Types.ObjectId(dto.rules);
-        if (dto.teams) updateQuery.teams = dto.teams.map(id => new Types.ObjectId(id));
-        const updated = await this.seasonModel.findByIdAndUpdate(id, updateQuery, { new: true }).exec();
+        if (dto.league) updateQuery.league = typeof dto.league === 'object' ? dto.league.id : dto.league;
+        const updated = await this.seasonModel.findByIdAndUpdate(id, updateQuery, { new: true }).populate('league').exec();
         if (!updated) throw new NotFoundException('Season not found');
         return this.toDto(updated);
     }
 
     async delete(id: string): Promise<SeasonDto> {
         if (!Types.ObjectId.isValid(id)) throw new NotFoundException('Season not found');
-        const deleted = await this.seasonModel.findByIdAndDelete(id).exec();
+        const deleted = await this.seasonModel.findByIdAndDelete(id).populate('league').exec();
         if (!deleted) throw new NotFoundException('Season not found');
         return this.toDto(deleted);
     }
@@ -52,23 +52,27 @@ export class SeasonService {
             name: dto.name,
             startDate: dto.startDate ? new Date(dto.startDate) : undefined,
             endDate: dto.endDate ? new Date(dto.endDate) : undefined,
-            league: dto.league ? new Types.ObjectId(dto.league) : undefined,
-            rules: dto.rules ? new Types.ObjectId(dto.rules) : undefined,
-            teams: dto.teams ? dto.teams.map(id => new Types.ObjectId(id)) : undefined,
+            league: dto.league ? new Types.ObjectId(dto.league.id) : undefined,
         };
         return season;
     }
 
     private toDto = (season: Season): SeasonDto => {
-        const { _id, name, startDate, endDate, league, rules, teams } = season;
+        const { _id, name, startDate, endDate, league } = season;
+        let leagueObj: { id: string; name: string } | undefined = undefined;
+        if (league && typeof league === 'object' && 'name' in league && '_id' in league) {
+            leagueObj = { id: league._id.toString(), name: (league as any).name };
+        } else if (league && typeof league === 'object' && '_id' in league) {
+            leagueObj = { id: league._id.toString(), name: '' };
+        } else if (league && typeof league === 'string') {
+            leagueObj = { id: league, name: '' };
+        }
         return {
             id: _id?.toString(),
+            league: leagueObj,
             name,
             startDate: startDate ? startDate.toISOString() : undefined,
             endDate: endDate ? endDate.toISOString() : undefined,
-            league: league ? league.toString() : undefined,
-            rules: rules ? rules.toString() : undefined,
-            teams: teams ? teams.map(id => id.toString()) : undefined,
         };
     };
 

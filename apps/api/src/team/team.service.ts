@@ -14,8 +14,8 @@ export class TeamService {
         const created = await this.teamModel.create({ ...dto, nation: nationId ? new Types.ObjectId(nationId) : undefined });
         // Populate nation for response
         const populated = await this.teamModel.findById(created._id).populate('nation').exec();
-    if (!populated) throw new NotFoundException('Team not found after creation');
-    return this.toDto(populated);
+        if (!populated) throw new NotFoundException('Team not found after creation');
+        return this.toDto(populated);
     }
 
     async findAll(nation?: string, name?: string): Promise<TeamDto[]> {
