@@ -10,6 +10,7 @@ import { NationModule } from './nation/nation.module';
 import { TeamModule } from './team/team.module';
 import { LeagueModule } from './league/league.module';
 import { SeasonModule } from './season/season.module';
+import { StageModule } from './stage/stage.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SeasonModule } from './season/season.module';
     TeamModule,
     LeagueModule,
     SeasonModule,
+    StageModule
   ],
   controllers: [AppController, AdminController],
   providers: [AppService],

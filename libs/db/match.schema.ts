@@ -10,8 +10,8 @@ export enum MatchStatus {
 export interface Match extends Document {
     leagueId: Types.ObjectId;
     seasonId: Types.ObjectId;
-    stageId?: Types.ObjectId;
-    roundNumber?: number;
+    stageId: Types.ObjectId;
+    roundNumber: number;
     homeTeamId: Types.ObjectId;
     awayTeamId: Types.ObjectId;
     date: Date;
