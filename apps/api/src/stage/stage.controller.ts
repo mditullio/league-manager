@@ -12,9 +12,7 @@ export class StageController {
   @ApiParam({ name: 'seasonId', type: String })
   @ApiResponse({ status: 201, type: StageDto })
   create(@Param('seasonId') seasonId: string, @Body() dto: StageDto) {
-    // Attach seasonId to DTO
-    dto.season = { id: seasonId, name: '' };
-    return this.stageService.create(dto);
+    return this.stageService.create({ ...dto, season: { id: seasonId, name: '' } });
   }
 
   @Get('seasons/:seasonId/stages')
