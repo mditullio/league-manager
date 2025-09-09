@@ -5,14 +5,21 @@ export enum StageType {
     Knockout = 'knockout',
 }
 
+export interface StageRound {
+    roundNumber: number;
+    name?: string;
+    startDate?: Date;
+    endDate?: Date;
+}
+
 export interface Stage extends Document {
-    seasonId: Types.ObjectId;
+    season: Types.ObjectId;
     order: number;
     name: string;
     type: StageType;
     startDate?: Date;
     endDate?: Date;
-    rounds?: Record<number, string>;
+    rounds?: StageRound[];
 }
 
 export enum GroupStageTieBreaker {
@@ -33,8 +40,14 @@ export interface GroupStageRules {
     otherRules?: Record<string, any>;
 }
 
+export interface TeamGroup {
+    name: string;
+    teams: Types.ObjectId[];
+}
+
 export interface GroupStage extends Stage {
-    teamGroups: Record<string, Types.ObjectId[]>;
+    type: StageType.Group;
+    groups: TeamGroup[];
     rules: GroupStageRules;
 }
 
@@ -47,26 +60,33 @@ export interface KnockoutStageRules {
 }
 
 export interface KnockoutStage extends Stage {
-    initialTeams: Types.ObjectId[];
+    type: StageType.Knockout;
+    teams: Types.ObjectId[];
     rules: KnockoutStageRules;
 }
 
 // --- Mongoose Schemas ---
 
 const baseStageSchema = new Schema<Stage>({
-    seasonId: { type: Schema.Types.ObjectId, ref: 'Season', required: true },
+    season: { type: Schema.Types.ObjectId, ref: 'Season', required: true },
     order: { type: Number, required: true },
     name: { type: String, required: true },
     type: { type: String, enum: Object.values(StageType), required: true },
-    rounds: { type: Schema.Types.Mixed },
+    rounds: [{
+        roundNumber: { type: Number, required: true },
+        name: { type: String },
+        startDate: { type: Date },
+        endDate: { type: Date },
+    }],
     startDate: { type: Date },
     endDate: { type: Date },
 }, { discriminatorKey: 'type', collection: 'stages' });
 
-export const StageModel = mongoose.model<Stage>('Stage', baseStageSchema);
-
 const groupStageSchema = new Schema<GroupStage>({
-    teamGroups: { type: Schema.Types.Mixed, required: true },
+    groups: [{
+        name: { type: String, required: true },
+        teams: [{ type: Schema.Types.ObjectId, ref: 'Team', required: true }],
+    }],
     rules: {
         pointsForWin: { type: Number, default: 3 },
         pointsForDraw: { type: Number, default: 1 },
@@ -77,10 +97,8 @@ const groupStageSchema = new Schema<GroupStage>({
     },
 });
 
-export const GroupStageModel = StageModel.discriminator<GroupStage>('group', groupStageSchema);
-
 const knockoutStageSchema = new Schema<KnockoutStage>({
-    initialTeams: [{ type: Schema.Types.ObjectId, ref: 'Team', required: true }],
+    teams: [{ type: Schema.Types.ObjectId, ref: 'Team', required: true }],
     rules: {
         twoLeggedTies: { type: Boolean, default: false },
         awayGoalsRule: { type: Boolean, default: false },
@@ -90,8 +108,7 @@ const knockoutStageSchema = new Schema<KnockoutStage>({
     },
 });
 
+export const StageModel = mongoose.model<Stage>('Stage', baseStageSchema);
+export const GroupStageModel = StageModel.discriminator<GroupStage>('group', groupStageSchema);
 export const KnockoutStageModel = StageModel.discriminator<KnockoutStage>('knockout', knockoutStageSchema);
-
-console.log(new KnockoutStageModel().type); // Ensure the model is registered
-
 

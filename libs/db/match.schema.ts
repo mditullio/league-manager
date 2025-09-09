@@ -8,12 +8,12 @@ export enum MatchStatus {
 }
 
 export interface Match extends Document {
-    leagueId: Types.ObjectId;
-    seasonId: Types.ObjectId;
-    stageId: Types.ObjectId;
+    league: Types.ObjectId;
+    season: Types.ObjectId;
+    stage: Types.ObjectId;
     roundNumber: number;
-    homeTeamId: Types.ObjectId;
-    awayTeamId: Types.ObjectId;
+    homeTeam: Types.ObjectId;
+    awayTeam: Types.ObjectId;
     date: Date;
     homeScore?: number;
     awayScore?: number;
@@ -23,12 +23,12 @@ export interface Match extends Document {
 }
 
 const MatchSchema = new Schema<Match>({
-    leagueId: { type: Schema.Types.ObjectId, ref: 'League', required: true },
-    seasonId: { type: Schema.Types.ObjectId, ref: 'Season', required: true },
-    stageId: { type: Schema.Types.ObjectId, ref: 'Stage', required: true },
+    league: { type: Schema.Types.ObjectId, ref: 'League', required: true },
+    season: { type: Schema.Types.ObjectId, ref: 'Season', required: true },
+    stage: { type: Schema.Types.ObjectId, ref: 'Stage', required: true },
     roundNumber: { type: Number, required: false },
-    homeTeamId: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
-    awayTeamId: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
+    homeTeam: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
+    awayTeam: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
     date: { type: Date, required: true },
     homeScore: { type: Number, required: false },
     awayScore: { type: Number, required: false },
