@@ -90,23 +90,21 @@ export class StageService {
 
     async update(id: string, dto: StageDto): Promise<StageDto> {
         if (!Types.ObjectId.isValid(id)) throw new NotFoundException('Stage not found');
-        const updateQuery: any = {
-            order: dto.order,
-            name: dto.name,
-            type: dto.type,
-            startDate: dto.startDate,
-            endDate: dto.endDate,
-        };
+        const updateQuery: any = { ...dto };
         if (dto.type === StageType.Group) {
             updateQuery.teamGroups = dto.teamGroups;
             updateQuery.rules = dto.groupRules;
+            const updated = await this.groupStageModel.findByIdAndUpdate(id, updateQuery, { new: true }).populate('seasonId').exec();
+            if (!updated) throw new NotFoundException('Stage not found');
+            return this.toDto(updated);
         } else if (dto.type === StageType.Knockout) {
             updateQuery.initialTeams = dto.initialTeams;
             updateQuery.rules = dto.knockoutRules;
+            const updated = await this.knockoutStageModel.findByIdAndUpdate(id, updateQuery, { new: true }).populate('seasonId').exec();
+            if (!updated) throw new NotFoundException('Stage not found');
+            return this.toDto(updated);
         }
-        const updated = await this.stageModel.findByIdAndUpdate(id, updateQuery, { new: true }).populate('seasonId').exec();
-        if (!updated) throw new NotFoundException('Stage not found');
-        return this.toDto(updated);
+        else throw new NotFoundException('Unknown stage type');        
     }
 
     async delete(id: string): Promise<StageDto> {
