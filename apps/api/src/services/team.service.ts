@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Team } from '../../../../libs/db/team.schema';
-import { TeamDto } from './dto/team.dto';
+import { Team } from '../models/team.schema';
+import { TeamDto } from '../dtos/team.dto';
 
 @Injectable()
 export class TeamService {

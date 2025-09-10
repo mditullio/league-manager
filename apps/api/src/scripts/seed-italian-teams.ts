@@ -2,8 +2,8 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: require('path').resolve(__dirname, '../../.env') });
 
 import mongoose from 'mongoose';
-import TeamSchema from '../../../../libs/db/team.schema';
-import Nation from '../../../../libs/db/nation.schema';
+import TeamSchema from '../models/team.schema';
+import Nation from '../models/nation.schema';
 
 const teamsData = [
   { name: 'Juventus', shortName: 'JUV', logoUrl: '', founded: 1897, city: 'Turin', stadium: 'Allianz Stadium', colors: ['black', 'white'] },

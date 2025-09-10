@@ -3,14 +3,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AdminController } from './admin.controller';
-import { NationModule } from './nation/nation.module';
-import { TeamModule } from './team/team.module';
-import { LeagueModule } from './league/league.module';
-import { SeasonModule } from './season/season.module';
-import { StageModule } from './stage/stage.module';
+import { AppController } from '../controllers/app.controller';
+import { AppService } from '../services/app.service';
+import { AdminController } from '../controllers/admin.controller';
+import { NationModule } from './nation.module';
+import { TeamModule } from './team.module';
+import { LeagueModule } from './league.module';
+import { SeasonModule } from './season.module';
+import { StageModule } from './stage.module';
 
 @Module({
   imports: [

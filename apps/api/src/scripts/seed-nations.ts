@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: require('path').resolve(__dirname, '../../.env') });
 import mongoose from 'mongoose';
-import NationSchema from '../../../../libs/db/nation.schema';
+import NationSchema from '../models/nation.schema';
 
 const nations = [
   { name: 'Italy', code: 'ITA', flagUrl: 'https://flagcdn.com/it.svg', flagEmoji: '🇮🇹' },

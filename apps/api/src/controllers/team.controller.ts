@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, Query } from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiBody, ApiParam, ApiQuery } from '@nestjs/swagger';
-import { TeamService } from './team.service';
-import { TeamDto } from './dto/team.dto';
+import { TeamService } from '../services/team.service';
+import { TeamDto } from '../dtos/team.dto';
 
 @ApiTags('Teams')
 @Controller('teams')

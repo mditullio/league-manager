@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Nation } from '../../../../libs/db/nation.schema';
-import { NationDto } from './dto/nation.dto';
+import { Nation } from '../models/nation.schema';
+import { NationDto } from '../dtos/nation.dto';
 
 @Injectable()
 export class NationService {

@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { League } from '../../../../libs/db/league.schema';
-import { LeagueDto } from './dto/league.dto';
+import { League } from '../models/league.schema';
+import { LeagueDto } from '../dtos/league.dto';
 
 @Injectable()
 export class LeagueService {

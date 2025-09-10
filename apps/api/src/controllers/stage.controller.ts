@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Param, Body, Patch, Delete } from '@nestjs/common';
-import { StageService } from './stage.service';
-import { StageDto } from './dto/stage.dto';
+import { StageService } from '../services/stage.service';
+import { StageDto } from '../dtos/stage.dto';
 import { ApiTags, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('Stages')

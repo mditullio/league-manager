@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types, UpdateQuery } from 'mongoose';
-import { StageType, Stage, GroupStage, KnockoutStage, TeamGroup, StageRound, GroupStageRules, KnockoutStageRules } from '../../../../libs/db/stage.schema';
-import { StageDto, GroupStageRulesDto, KnockoutStageRulesDto, TeamGroupDto, StageRoundDto } from './dto/stage.dto';
-import { TeamRefDto } from './dto/team-ref.dto';
+import { StageType, Stage, GroupStage, KnockoutStage, TeamGroup, StageRound, GroupStageRules, KnockoutStageRules } from '../models/stage.schema';
+import { StageDto, GroupStageRulesDto, KnockoutStageRulesDto, TeamGroupDto, StageRoundDto } from '../dtos/stage.dto';
+import { TeamRefDto } from '../dtos/team-ref.dto';
 
 @Injectable()
 export class StageService {

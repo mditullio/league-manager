@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, Query } from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiBody, ApiParam, ApiQuery } from '@nestjs/swagger';
-import { LeagueService } from './league.service';
-import { LeagueDto } from './dto/league.dto';
+import { LeagueService } from '../services/league.service';
+import { LeagueDto } from '../dtos/league.dto';
 
 @ApiTags('Leagues')
 @Controller('leagues')

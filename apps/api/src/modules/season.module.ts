@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SeasonController } from './season.controller';
-import { SeasonService } from './season.service';
-import SeasonModel from '../../../../libs/db/season.schema';
+import { SeasonController } from '../controllers/season.controller';
+import { SeasonService } from '../services/season.service';
+import SeasonModel from '../models/season.schema';
 
 @Module({
   imports: [

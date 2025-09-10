@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { StageController } from './stage.controller';
-import { StageService } from './stage.service';
-import { GroupStageModel, KnockoutStageModel, Stage, StageModel } from '../../../../libs/db/stage.schema';
+import { StageController } from '../controllers/stage.controller';
+import { StageService } from '../services/stage.service';
+import { GroupStageModel, KnockoutStageModel, Stage, StageModel } from '../models/stage.schema';
 
 @Module({
   imports: [

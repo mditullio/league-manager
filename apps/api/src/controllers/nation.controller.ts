@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, Query } from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiBody, ApiParam, ApiQuery } from '@nestjs/swagger';
-import { NationService } from './nation.service';
-import { NationDto } from './dto/nation.dto';
+import { NationService } from '../services/nation.service';
+import { NationDto } from '../dtos/nation.dto';
 
 @ApiTags('Nations')
 @Controller('nations')

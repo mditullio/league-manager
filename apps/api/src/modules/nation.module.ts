@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { NationService } from './nation.service';
-import { NationController } from './nation.controller';
-import NationSchema from '../../../../libs/db/nation.schema';
+import { NationService } from '../services/nation.service';
+import { NationController } from '../controllers/nation.controller';
+import NationSchema from '../models/nation.schema';
 
 @Module({
   imports: [
