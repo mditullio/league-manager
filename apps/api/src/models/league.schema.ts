@@ -14,4 +14,4 @@ const LeagueSchema = new Schema<League>({
   description: { type: String },
 });
 
-export default mongoose.model<League>('League', LeagueSchema);
+export const LeagueModel = mongoose.model<League>('League', LeagueSchema);

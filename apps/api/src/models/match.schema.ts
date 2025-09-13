@@ -11,10 +11,11 @@ export interface Match extends Document {
     league: Types.ObjectId;
     season: Types.ObjectId;
     stage: Types.ObjectId;
+    groupName?: string;
     roundNumber: number;
     homeTeam: Types.ObjectId;
     awayTeam: Types.ObjectId;
-    date: Date;
+    date?: Date;
     homeScore?: number;
     awayScore?: number;
     status: MatchStatus;
@@ -26,10 +27,11 @@ const MatchSchema = new Schema<Match>({
     league: { type: Schema.Types.ObjectId, ref: 'League', required: true },
     season: { type: Schema.Types.ObjectId, ref: 'Season', required: true },
     stage: { type: Schema.Types.ObjectId, ref: 'Stage', required: true },
-    roundNumber: { type: Number, required: false },
+    groupName: { type: String, required: false },
+    roundNumber: { type: Number, required: true },
     homeTeam: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
     awayTeam: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
-    date: { type: Date, required: true },
+    date: { type: Date, required: false },
     homeScore: { type: Number, required: false },
     awayScore: { type: Number, required: false },
     status: { type: String, enum: Object.values(MatchStatus), default: MatchStatus.Scheduled },
@@ -37,4 +39,4 @@ const MatchSchema = new Schema<Match>({
     notes: { type: String, required: false },
 });
 
-export default mongoose.model<Match>('Match', MatchSchema);
+export const MatchModel = mongoose.model<Match>('Match', MatchSchema);

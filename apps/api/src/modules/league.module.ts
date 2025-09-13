@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LeagueService } from '../services/league.service';
 import { LeagueController } from '../controllers/league.controller';
-import LeagueSchema from '../models/league.schema';
+import { LeagueModel } from '../models/league.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'League', schema: LeagueSchema.schema }]),
-  ],
-  providers: [LeagueService],
-  controllers: [LeagueController],
+    imports: [
+        MongooseModule.forFeature([{ name: 'League', schema: LeagueModel.schema }]),
+    ],
+    providers: [LeagueService],
+    controllers: [LeagueController],
 })
-export class LeagueModule {}
+export class LeagueModule { }

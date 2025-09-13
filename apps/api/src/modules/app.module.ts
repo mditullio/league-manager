@@ -11,6 +11,7 @@ import { TeamModule } from './team.module';
 import { LeagueModule } from './league.module';
 import { SeasonModule } from './season.module';
 import { StageModule } from './stage.module';
+import { MatchModule } from './match.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { StageModule } from './stage.module';
     TeamModule,
     LeagueModule,
     SeasonModule,
-    StageModule
+    StageModule,
+    MatchModule
   ],
   controllers: [AppController, AdminController],
   providers: [AppService],
