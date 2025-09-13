@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Param, Body, Patch, Delete } from '@nestjs/common';
 import { SeasonService } from '../services/season.service';
-import { SeasonDto } from '../season/dto/season.dto';
+import { SeasonDto } from '../dtos/season.dto';
 import { ApiTags, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('Seasons')

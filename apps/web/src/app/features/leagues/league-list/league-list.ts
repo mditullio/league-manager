@@ -28,6 +28,10 @@ export class LeagueListComponent implements OnInit {
     this.router.navigate(['/leagues', 'edit', league.id]);
   }
 
+  goToSeasons(league: League) {
+    this.router.navigate(['/seasons'], { queryParams: { league: league.id } });
+  }
+
   addLeague() {
     this.router.navigate(['/leagues', 'new']);
   }

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Season } from '../models/season.schema';
-import { SeasonDto } from '../season/dto/season.dto';
+import { SeasonDto } from '../dtos/season.dto';
 
 @Injectable()
 export class SeasonService {
