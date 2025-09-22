@@ -11,10 +11,10 @@ export class SeasonDto {
   @ApiProperty({ example: '2024/2025', required: false })
   name: string;
 
-  @ApiProperty({ type: String, format: 'date-time', required: false })
+  @ApiProperty({ type: String, format: 'date', required: false })
   startDate?: string;
 
-  @ApiProperty({ type: String, format: 'date-time', required: false })
+  @ApiProperty({ type: String, format: 'date', required: false })
   endDate?: string;
 
 }

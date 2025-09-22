@@ -7,6 +7,7 @@ import { TeamDetailComponent } from './features/teams/team-detail/team-detail';
 import { LeagueListComponent } from './features/leagues/league-list/league-list';
 import { LeagueDetailComponent } from './features/leagues/league-detail/league-detail';
 import { SeasonListComponent } from './features/seasons/season-list/season-list';
+import { SeasonDetailComponent } from './features/seasons/season-detail/season-detail';
 
 export const routes: Routes = [
     {
@@ -49,12 +50,12 @@ export const routes: Routes = [
         path: 'seasons',
         component: SeasonListComponent
     },
-    // {
-    //     path: 'seasons/new',
-    //     component: SeasonDetailComponent
-    // },
-    // {
-    //     path: 'seasons/edit/:id',
-    //     component: SeasonDetailComponent
-    // },
+    {
+        path: 'seasons/new',
+        component: SeasonDetailComponent
+    },
+    {
+        path: 'seasons/edit/:id',
+        component: SeasonDetailComponent
+    },
 ];
