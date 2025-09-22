@@ -2,6 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { TeamRefDto } from './team-ref.dto';
 
 export class TeamGroupDto {
+    @ApiProperty({ example: '64e4b8f2c2a4b2e4d8e4b8f2', required: false })
+    id?: string;
+
     @ApiProperty({ example: 'Group A' })
     name!: string;
 
@@ -10,6 +13,9 @@ export class TeamGroupDto {
 }
 
 export class StageRoundDto {
+    @ApiProperty({ example: '64e4b8f2c2a4b2e4d8e4b8f2', required: false })
+    id?: string;
+
     @ApiProperty({ example: 1 })
     roundNumber!: number;
 

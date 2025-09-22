@@ -1,4 +1,8 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
+import { League } from './league.schema';
+import { Stage } from './stage.schema';
+import { Season } from './season.schema';
+import { Team } from './team.schema';
 
 export enum MatchStatus {
     Scheduled = 'scheduled',
@@ -7,14 +11,14 @@ export enum MatchStatus {
     Cancelled = 'cancelled',
 }
 
-export interface Match extends Document {
-    league: Types.ObjectId;
-    season: Types.ObjectId;
-    stage: Types.ObjectId;
+export interface Match extends Document<Types.ObjectId> {
+    league: Types.ObjectId | League;
+    season: Types.ObjectId | Season;
+    stage: Types.ObjectId | Stage;
     groupName?: string;
     roundNumber: number;
-    homeTeam: Types.ObjectId;
-    awayTeam: Types.ObjectId;
+    homeTeam: Types.ObjectId | Team;
+    awayTeam: Types.ObjectId | Team;
     date?: Date;
     homeScore?: number;
     awayScore?: number;

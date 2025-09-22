@@ -1,19 +1,22 @@
+import e from 'express';
 import mongoose, { Schema, Document, Types } from 'mongoose';
+import { Season } from './season.schema';
+import { Team } from './team.schema';
 
 export enum StageType {
     Group = 'group',
     Knockout = 'knockout',
 }
 
-export interface StageRound {
+export interface StageRound extends Document<Types.ObjectId> {
     roundNumber: number;
     name?: string;
     startDate?: Date;
     endDate?: Date;
 }
 
-export interface Stage extends Document {
-    season: Types.ObjectId;
+export interface Stage extends Document<Types.ObjectId> {
+    season: Types.ObjectId | Season;
     order: number;
     name: string;
     type: StageType;
@@ -40,9 +43,9 @@ export interface GroupStageRules {
     otherRules?: Record<string, any>;
 }
 
-export interface TeamGroup {
+export interface TeamGroup extends Document<Types.ObjectId> {
     name: string;
-    teams: Types.ObjectId[];
+    teams: (Types.ObjectId | Team)[];
 }
 
 export interface GroupStage extends Stage {
@@ -61,7 +64,7 @@ export interface KnockoutStageRules {
 
 export interface KnockoutStage extends Stage {
     type: StageType.Knockout;
-    teams: Types.ObjectId[];
+    teams: (Types.ObjectId | Team)[];
     rules: KnockoutStageRules;
 }
 

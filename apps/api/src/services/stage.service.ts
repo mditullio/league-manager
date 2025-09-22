@@ -36,7 +36,7 @@ export class StageService {
                 groups: dto.groups?.map(g => ({ name: g.name, teams: g.teams?.map(t => t.id) })),
                 rules: dto.groupRules,
             });
-        } 
+        }
         else if (dto.type === StageType.Knockout) {
             created = await this.knockoutStageModel.create({
                 season: dto.season?.id,
@@ -158,6 +158,7 @@ export class StageService {
         };
         if (rounds) {
             dto.rounds = rounds.map((r: any) => ({
+                id: r._id?.toString(),
                 roundNumber: r.roundNumber,
                 name: r.name,
                 startDate: r.startDate ? new Date(r.startDate).toISOString() : undefined,
@@ -166,16 +167,14 @@ export class StageService {
         }
         if (type === StageType.Group) {
             const { groups, rules } = stage as GroupStage;
-            dto.groups = (groups || []).map((group: TeamGroup) => {
-                const tg: TeamGroupDto = {
-                    name: group.name,
-                    teams: (group.teams || []).map((team: any) => ({
-                        id: team._id?.toString(),
-                        name: team.name,
-                    }))
-                };
-                return tg;
-            });
+            dto.groups = (groups || []).map((group: any) => ({
+                id: group._id?.toString(),
+                name: group.name,
+                teams: (group.teams || []).map((team: any) => ({
+                    id: team._id?.toString(),
+                    name: team.name,
+                }))
+            }));
             dto.groupRules = rules as GroupStageRulesDto;
         } else if (type === StageType.Knockout) {
             const { teams, rules } = stage as KnockoutStage;
