@@ -71,8 +71,8 @@ export class SeasonService {
             id: _id?.toString(),
             league: leagueObj,
             name,
-            startDate: startDate ? startDate.toISOString() : undefined,
-            endDate: endDate ? endDate.toISOString() : undefined,
+            startDate: startDate ? startDate.toISOString().substring(0, 10) : undefined,
+            endDate: endDate ? endDate.toISOString().substring(0, 10) : undefined,
         };
     };
 
